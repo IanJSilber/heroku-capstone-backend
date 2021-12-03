@@ -1,4 +1,3 @@
-class ApplicationController < ActionController::API
   class ApplicationController < ActionController::API
     def current_user
       auth_headers = request.headers["Authorization"]
@@ -23,5 +22,4 @@ class ApplicationController < ActionController::API
         render json: {}, status: :unauthorized
       end
     end
-  end  
-end
+  end

@@ -21,7 +21,7 @@ Content-Type: application/json
 ###
 
 GET http://localhost:3000/positions.json
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJleHAiOjE2MzgzMjgyMTV9.dg2bkYOd2PekEdpYFLdHLGFdR_8jHUiGCgf5AOgeXH8
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJleHAiOjE2MzgzNzc2ODF9.FFw_cW8N1-wnaRb3syv2ni6xr9Nbc052mAcG5nYP3JU
 Content-Type: application/json
 
 ###
