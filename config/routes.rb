@@ -6,3 +6,4 @@ Rails.application.routes.draw do
   get "/positions" => "positions#index"
   post "/positions" => "positions#create"
 end
+#this is a github test
