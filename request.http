@@ -1,10 +1,12 @@
+jwt = eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJleHAiOjE2Mzg2NDMxNjF9.h_3f6JUFCx3-75xahBK52r5tg_LPLaYDvFxM-x3evGg
+
 ### Users create (signup)
 POST http://localhost:3000/users
 Content-Type: application/json
 
 {
-  "name": "Test name",
-  "email": "test@test.com",
+  "name": "amanda hale",
+  "email": "amanda@test.com",
   "password": "password",
   "password_confirmation": "password"
 }
@@ -15,22 +17,39 @@ POST http://localhost:3000/sessions
 Content-Type: application/json
 
 {
-  "email": "test@test.com",
+  "email": "amanda@test.com",
   "password": "password"
 }
 ###
 
-GET http://localhost:3000/positions.json
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJleHAiOjE2MzgzNzc2ODF9.FFw_cW8N1-wnaRb3syv2ni6xr9Nbc052mAcG5nYP3JU
+GET http://localhost:3000/positions/6.json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjozLCJleHAiOjE2Mzg2NDYwMzB9.x2G5e4x-2BG5YqPlzb3y7SRYitV2cW6jHezvb7aqgH4
 Content-Type: application/json
 
 ###
 
 POST http://localhost:3000/positions.json
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJleHAiOjE2MzgzMjgyMTV9.dg2bkYOd2PekEdpYFLdHLGFdR_8jHUiGCgf5AOgeXH8
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjozLCJleHAiOjE2Mzg2NDYwMzB9.x2G5e4x-2BG5YqPlzb3y7SRYitV2cW6jHezvb7aqgH4
+Content-Type: application/json
+
+{
+  "asset": "DOGE",
+  "amount": 100
+}
+
+###
+
+PATCH http://localhost:3000/positions/5.json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjozLCJleHAiOjE2Mzg2NDYwMzB9.x2G5e4x-2BG5YqPlzb3y7SRYitV2cW6jHezvb7aqgH4
 Content-Type: application/json
 
 {
   "asset": "BTC",
-  "amount": 3
+  "amount": 2
 }
+
+###
+
+DELETE http://localhost:3000/positions/2.json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjozLCJleHAiOjE2Mzg2NDYwMzB9.x2G5e4x-2BG5YqPlzb3y7SRYitV2cW6jHezvb7aqgH4
+Content-Type: application/json
