@@ -4,8 +4,8 @@ User.create!([
   {name: "Ian Silber", email: "ian@test.com", password_digest: "$2a$12$OJs0vWSPNdOoba9ZEtDp6.zbMMMPdqkjtWGMHmWmCQa/mKvCJUI2C"}
 ])
 Position.create!([
-  {asset: "ETH", amount: 12, user_id: 1},
-  {asset: "LUNA", amount: 107, user_id: 1},
-  {asset: "BTC", amount: 1, user_id: 1},
-  {asset: "BTC", amount: 1, user_id: 2}
+  {asset: "ETHUSDT", amount: 12, user_id: 1},
+  {asset: "LUNAUSDT", amount: 107, user_id: 1},
+  {asset: "BTCUSDT", amount: 1, user_id: 1},
+  {asset: "BTCUSDT", amount: 1, user_id: 2}
 ])

@@ -1,7 +1,7 @@
 class PositionsController < ApplicationController
   before_action :authenticate_user, except: [:index]
   def index
-    user_id = current_user.id
+    user_id = 1 #current_user.id
     positions = Position.where(user_id: user_id)
 
     render json: positions
