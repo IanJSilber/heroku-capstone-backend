@@ -1,3 +1,3 @@
 class PositionSerializer < ActiveModel::Serializer
-  attributes :id, :asset, :amount, :price, :get_price
+  attributes :id, :asset, :amount, :price, :position_value
 end

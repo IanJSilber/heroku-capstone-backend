@@ -22,18 +22,18 @@ Content-Type: application/json
 }
 ###
 
-GET http://localhost:3000/positions/6.json
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjozLCJleHAiOjE2Mzg2NDYwMzB9.x2G5e4x-2BG5YqPlzb3y7SRYitV2cW6jHezvb7aqgH4
+GET http://localhost:3000/positions.json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoyLCJleHAiOjE2MzkzNTY2MzZ9.oH5SJpNioLajAfmtAdtIcv9LPiqk1kqAq-tz30m7UCU
 Content-Type: application/json
 
 ###
 
 POST http://localhost:3000/positions.json
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjozLCJleHAiOjE2Mzg2NDYwMzB9.x2G5e4x-2BG5YqPlzb3y7SRYitV2cW6jHezvb7aqgH4
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoyLCJleHAiOjE2MzkzNTY2MzZ9.oH5SJpNioLajAfmtAdtIcv9LPiqk1kqAq-tz30m7UCU
 Content-Type: application/json
 
 {
-  "asset": "DOGE",
+  "asset": "DOGEUSDT",
   "amount": 100
 }
 
