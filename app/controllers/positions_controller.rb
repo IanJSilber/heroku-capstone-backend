@@ -4,16 +4,22 @@ class PositionsController < ApplicationController
     positions = Position.where(user_id: current_user.id)
     i = 0
     while i < positions.length
-      request = HTTP.get("https://api2.binance.com/api/v3/ticker/price?symbol=#{positions[i].asset}")
+      request = HTTP.get("https://api2.binance.com/api/v3/ticker/price?symbol=#{positions[i].asset}USDT")
       request = request.parse(:json)
-      positions[i].price = request["price"]
+      positions[i].price = request["price"].to_f.round(2)
       i += 1
     end
     render json: positions
   end
 
   def show
-    position = Position.where(user_id: current_user.id, id: params[:id])
+    position = Position.find_by(user_id: current_user.id, id: params[:id])
+
+    request = HTTP.get("https://api2.binance.com/api/v3/ticker/price?symbol=#{position.asset}USDT")
+    request = request.parse(:json)
+
+    position.price = request["price"].to_f.round(2)
+
     render json: position
   end
 

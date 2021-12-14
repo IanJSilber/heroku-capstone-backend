@@ -10,10 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_12_07_021904) do
+ActiveRecord::Schema.define(version: 2021_12_13_182904) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "assets", force: :cascade do |t|
+    t.string "name"
+    t.string "price"
+    t.string "percent_change"
+    t.string "watchlist_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
 
   create_table "positions", force: :cascade do |t|
     t.string "asset"
@@ -34,7 +43,6 @@ ActiveRecord::Schema.define(version: 2021_12_07_021904) do
 
   create_table "watchlists", force: :cascade do |t|
     t.string "name"
-    t.string "asset"
     t.integer "user_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
