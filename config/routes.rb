@@ -1,7 +1,13 @@
 Rails.application.routes.draw do
-  post "/users" => "users#create"
 
+  #User and Sessions routes
+
+  post "/users" => "users#create"
   post "/sessions" => "sessions#create"
+
+  #News route
+
+  get "/news" => "news#index"
 
   #positions routes
 
