@@ -1,12 +1,13 @@
 class PositionsController < ApplicationController
   before_action :authenticate_user, except: [:index]
   def index
-    positions = Position.where(user_id: current_user.id)
+    positions = current_user.positions
     i = 0
     while i < positions.length
-      request = HTTP.get("https://api2.binance.com/api/v3/ticker/price?symbol=#{positions[i].asset}USDT")
+      request = HTTP.get("https://api2.binance.com/api/v3/ticker/24hr?symbol=#{positions[i].asset}USDT")
       request = request.parse(:json)
-      positions[i].price = request["price"].to_f.round(2)
+      positions[i].percent_change = request["priceChangePercent"]
+      positions[i].price = request["lastPrice"].to_f.round(2)
       i += 1
     end
     render json: positions

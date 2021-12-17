@@ -2,6 +2,7 @@ Rails.application.routes.draw do
 
   #User and Sessions routes
 
+  get "/users" => "users#index"
   post "/users" => "users#create"
   post "/sessions" => "sessions#create"
 
@@ -32,5 +33,6 @@ Rails.application.routes.draw do
   post "/assets" => "assets#create"
   patch "/assets/:id" => "assets#update"
   delete "/assets/:id" => "assets#destroy"
+  
 end
 #this is a github test

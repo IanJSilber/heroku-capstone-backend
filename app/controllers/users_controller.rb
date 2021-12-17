@@ -1,4 +1,8 @@
 class UsersController < ApplicationController
+  def index
+    user = User.find_by(id: current_user.id)
+    render json: user
+  end
   def create
     user = User.new(
       name: params[:name],

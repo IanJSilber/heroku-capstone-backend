@@ -1,3 +1,5 @@
 class PositionSerializer < ActiveModel::Serializer
-  attributes :id, :asset, :amount, :price, :position_value
+  belongs_to :user
+  
+  attributes :id, :asset, :amount, :price, :position_value, :user, :percent_change
 end
