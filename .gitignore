@@ -27,4 +27,4 @@
 /config/master.key
 
 #ignore api key file
-.news_api_key.rb
+.api_keys.rb

@@ -10,6 +10,10 @@ Rails.application.routes.draw do
 
   get "/news" => "news#index"
 
+  #Top coins route
+
+  get "/top-coins" => "top_coins#index"
+
   #positions routes
 
   get "/positions" => "positions#index"
