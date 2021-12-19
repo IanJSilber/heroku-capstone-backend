@@ -3,7 +3,7 @@ class WatchlistsController < ApplicationController
   before_action :authenticate_user
 
   def index
-    watchlists = Watchlist.where(user_id: current_user.id)
+    watchlists = current_user.watchlists
     render json: watchlists
   end
 

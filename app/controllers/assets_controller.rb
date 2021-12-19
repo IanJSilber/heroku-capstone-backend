@@ -1,26 +1,28 @@
+require_relative "../../.api_keys.rb"
+
 class AssetsController < ApplicationController
-  
+
   def index
     assets = Asset.where(watchlist_id: params[:watchlist_id])
+
+    assets_array = []
     i = 0
     while i < assets.length
-      request = HTTP.get("https://api2.binance.com/api/v3/ticker/price?symbol=#{assets[i].name}USDT")
+      symbol = assets[i].name
+      request = HTTP.get("https://pro-api.coinmarketcap.com/v1/cryptocurrency/quotes/latest?CMC_PRO_API_KEY=#{$cmc_api_key}&symbol=#{symbol}")
       request = request.parse(:json)
-      assets[i].price = request["price"].to_f.round(2)
+      temp = { name: "", symbol: "", price: 0, percent_change_1hr: 0, percent_change_24hr: 0, percent_change_7d: 0, percent_change_30d: 0, }
+      temp["symbol"] = request["data"][symbol]["symbol"]
+      temp["name"] = request["data"][symbol]["name"]
+      temp["price"] = '%.2f' % request["data"][symbol]["quote"]["USD"]["price"]
+      temp["percent_change_1hr"] = '%.2f' % request["data"][symbol]["quote"]["USD"]["percent_change_1h"]
+      temp["percent_change_24hr"] = '%.2f' % request["data"][symbol]["quote"]["USD"]["percent_change_24h"]
+      temp["percent_change_7d"] = '%.2f' % request["data"][symbol]["quote"]["USD"]["percent_change_7d"]
+      temp["percent_change_30d"] = '%.2f' % request["data"][symbol]["quote"]["USD"]["percent_change_30d"]
       i += 1
+      assets_array << temp
     end
-    render json: assets
-  end
-
-  def show
-    asset = Asset.find_by(watchlist_id: params[:watchlist_id], id: params[:id])
-
-    request = HTTP.get("https://api2.binance.com/api/v3/ticker/price?symbol=#{asset.name}USDT")
-    request = request.parse(:json)
-
-    asset.price = request["price"].to_f.round(2)
-
-    render json: asset
+    render json: assets_array
   end
 
   def create

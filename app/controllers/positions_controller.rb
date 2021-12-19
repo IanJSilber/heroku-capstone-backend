@@ -7,7 +7,7 @@ class PositionsController < ApplicationController
       request = HTTP.get("https://api2.binance.com/api/v3/ticker/24hr?symbol=#{positions[i].asset}USDT")
       request = request.parse(:json)
       positions[i].percent_change = request["priceChangePercent"]
-      positions[i].price = request["lastPrice"].to_f.round(2)
+      positions[i].price = '%.2f' % (request["lastPrice"].to_i)
       i += 1
     end
     render json: positions
@@ -19,7 +19,7 @@ class PositionsController < ApplicationController
     request = HTTP.get("https://api2.binance.com/api/v3/ticker/price?symbol=#{position.asset}USDT")
     request = request.parse(:json)
 
-    position.price = request["price"].to_f.round(2)
+    position.price = '%.2f' % (request["price"].to_i)
 
     render json: position
   end
@@ -29,7 +29,12 @@ class PositionsController < ApplicationController
       user_id: current_user.id,
       asset: params[:asset],
       amount: params[:amount],
+      purchase_price: 0,
     )
+    request = HTTP.get("https://api2.binance.com/api/v3/ticker/price?symbol=#{position.asset}USDT")
+    request = request.parse(:json)
+    position.purchase_price = '%.2f' % (request["price"].to_i)
+
     if position.save
       render json: position
     else

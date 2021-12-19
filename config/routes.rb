@@ -33,7 +33,6 @@ Rails.application.routes.draw do
   #assets routes
 
   get "/assets/:watchlist_id" => "assets#index"
-  get "/assets/:watchlist_id/:id" => "assets#show"
   post "/assets" => "assets#create"
   patch "/assets/:id" => "assets#update"
   delete "/assets/:id" => "assets#destroy"
