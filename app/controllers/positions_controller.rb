@@ -1,13 +1,19 @@
+require_relative "../../.api_keys.rb"
 class PositionsController < ApplicationController
   before_action :authenticate_user, except: [:index]
   def index
     positions = current_user.positions
     i = 0
     while i < positions.length
-      request = HTTP.get("https://api2.binance.com/api/v3/ticker/24hr?symbol=#{positions[i].asset}USDT")
+      symbol = positions[i].symbol
+      request = HTTP.get("https://pro-api.coinmarketcap.com/v1/cryptocurrency/quotes/latest?CMC_PRO_API_KEY=#{$cmc_api_key}&symbol=#{symbol}")
       request = request.parse(:json)
-      positions[i].percent_change = request["priceChangePercent"]
-      positions[i].price = '%.2f' % (request["lastPrice"].to_i)
+      positions[i].symbol = request["data"][symbol]["symbol"]
+      positions[i].price = '%.2f' % request["data"][symbol]["quote"]["USD"]["price"]
+      positions[i].percent_change_1h = '%.2f' % request["data"][symbol]["quote"]["USD"]["percent_change_1h"]
+      positions[i].percent_change_24h = '%.2f' % request["data"][symbol]["quote"]["USD"]["percent_change_24h"]
+      positions[i].percent_change_7d = '%.2f' % request["data"][symbol]["quote"]["USD"]["percent_change_7d"]
+      positions[i].percent_change_30d = '%.2f' % request["data"][symbol]["quote"]["USD"]["percent_change_30d"]
       i += 1
     end
     render json: positions
@@ -15,8 +21,8 @@ class PositionsController < ApplicationController
 
   def show
     position = Position.find_by(user_id: current_user.id, id: params[:id])
-
-    request = HTTP.get("https://api2.binance.com/api/v3/ticker/price?symbol=#{position.asset}USDT")
+    symbol = position.symbol
+    request = HTTP.get("https://pro-api.coinmarketcap.com/v1/cryptocurrency/quotes/latest?CMC_PRO_API_KEY=#{$cmc_api_key}&symbol=#{symbol}")
     request = request.parse(:json)
 
     position.price = '%.2f' % (request["price"].to_i)
@@ -25,15 +31,15 @@ class PositionsController < ApplicationController
   end
 
   def create
+    symbol = params[:symbol]
+    request = HTTP.get("https://pro-api.coinmarketcap.com/v1/cryptocurrency/quotes/latest?CMC_PRO_API_KEY=#{$cmc_api_key}&symbol=#{symbol}")
+    request = request.parse(:json)
     position = Position.new(
       user_id: current_user.id,
-      asset: params[:asset],
+      symbol: params[:symbol],
       amount: params[:amount],
-      purchase_price: 0,
+      purchase_price: '%.2f' % request["data"][symbol]["quote"]["USD"]["price"]
     )
-    request = HTTP.get("https://api2.binance.com/api/v3/ticker/price?symbol=#{position.asset}USDT")
-    request = request.parse(:json)
-    position.purchase_price = '%.2f' % (request["price"].to_i)
 
     if position.save
       render json: position
