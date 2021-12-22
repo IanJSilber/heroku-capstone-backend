@@ -1,0 +1,3 @@
+class TopCoin < ApplicationRecord
+
+end

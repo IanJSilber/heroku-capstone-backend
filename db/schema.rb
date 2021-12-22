@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_12_19_230105) do
+ActiveRecord::Schema.define(version: 2021_12_22_202529) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -40,6 +40,18 @@ ActiveRecord::Schema.define(version: 2021_12_19_230105) do
     t.integer "price"
     t.integer "purchase_price"
     t.string "symbol"
+  end
+
+  create_table "top_coins", force: :cascade do |t|
+    t.integer "rank"
+    t.string "name"
+    t.string "symbol"
+    t.float "percent_change_24h"
+    t.float "percent_change_7d"
+    t.float "percent_change_30d"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.float "price"
   end
 
   create_table "users", force: :cascade do |t|

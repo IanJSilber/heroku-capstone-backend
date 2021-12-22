@@ -16,4 +16,8 @@ class UsersController < ApplicationController
       render json: { errors: user.errors.full_messages }, status: :bad_request
     end
   end
+  def index
+    user = User.find_by(id: current_user.id)
+    render json: user
+  end
 end
