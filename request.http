@@ -1,7 +1,7 @@
 jwt = eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJleHAiOjE2Mzg2NDMxNjF9.h_3f6JUFCx3-75xahBK52r5tg_LPLaYDvFxM-x3evGg
 
 ### Users create (signup)
-POST http://localhost:3000/users
+POST https://fast-mesa-53000.herokuapp.com/users
 Content-Type: application/json
 
 {

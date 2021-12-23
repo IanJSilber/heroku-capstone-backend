@@ -25,6 +25,3 @@
 
 # Ignore master key for decrypting credentials and more.
 /config/master.key
-
-#ignore api key file
-.api_keys.rb
