@@ -17,13 +17,13 @@ POST http://localhost:3000/sessions
 Content-Type: application/json
 
 {
-  "email": "amanda@test.com",
+  "email": "ian",
   "password": "password"
 }
 ###
 
 GET http://localhost:3000/positions.json
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoyLCJleHAiOjE2MzkzNTY2MzZ9.oH5SJpNioLajAfmtAdtIcv9LPiqk1kqAq-tz30m7UCU
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJleHAiOjE2NDAzMjQyMDF9.jdQbx1gUPwy3v_cCIKXJVrpKi-64Jj_nxdBakG5a43g
 Content-Type: application/json
 
 ###

@@ -8,9 +8,8 @@ class AssetsController < ApplicationController
     i = 0
     while i < assets.length
       symbol = assets[i].symbol
-      request = HTTP.get("https://pro-api.coinmarketcap.com/v1/cryptocurrency/quotes/latest?CMC_PRO_API_KEY=#{$cmc_api_key}&symbol=#{symbol}")
+      request = HTTP.get("https://pro-api.coinmarketcap.com/v1/cryptocurrency/quotes/latest?CMC_PRO_API_KEY=#{$cmc_api_keys.sample}&symbol=#{symbol}")
       request = request.parse(:json)
-      assets[i].symbol = request["data"][symbol]["symbol"]
       assets[i].name = request["data"][symbol]["name"]
       assets[i].price = '%.2f' % request["data"][symbol]["quote"]["USD"]["price"]
       assets[i].percent_change_1h = '%.2f' % request["data"][symbol]["quote"]["USD"]["percent_change_1h"]
@@ -35,7 +34,7 @@ class AssetsController < ApplicationController
   end
 
   def destroy
-    asset = asset.find_by(id: params[:id])
+    asset = Asset.find_by(id: params[:id])
     asset.destroy
     render json: {message: "asset successfully destroyed"}
   end
