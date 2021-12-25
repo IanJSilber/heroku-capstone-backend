@@ -1,23 +1,23 @@
 jwt = eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJleHAiOjE2Mzg2NDMxNjF9.h_3f6JUFCx3-75xahBK52r5tg_LPLaYDvFxM-x3evGg
 
 ### Users create (signup)
-POST https://fast-mesa-53000.herokuapp.com/users
+POST https://dry-temple-69566.herokuapp.com/users
 Content-Type: application/json
 
 {
-  "name": "amanda hale",
-  "email": "amanda@test.com",
+  "name": "Ian",
+  "email": "Ian@test.com",
   "password": "password",
   "password_confirmation": "password"
 }
 
 ###
 
-POST http://localhost:3000/sessions
+POST https://dry-temple-69566.herokuapp.com/sessions
 Content-Type: application/json
 
 {
-  "email": "ian",
+  "email": "Ian@test.com",
   "password": "password"
 }
 ###
