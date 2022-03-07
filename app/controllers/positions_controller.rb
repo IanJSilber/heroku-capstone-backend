@@ -1,71 +1,78 @@
 require_relative "../../.api_keys.rb"
 class PositionsController < ApplicationController
-  before_action :authenticate_user, except: [:index]
+
+  before_action :authenticate_user
+  # INDEX ROUTE
   def index
-    positions = Position.where(user_id: current_user.id)
-    i = 0
-    positions.each do |position|
+    positions = Position.where(user_id: current_user.id) # positions = positions that belong to the current user
+
+    positions.each do |position| # go through each position and update price and percent changes
       symbol = position.symbol
       request = HTTP.get("https://pro-api.coinmarketcap.com/v1/cryptocurrency/quotes/latest?CMC_PRO_API_KEY=#{$cmc_api_keys.sample}&symbol=#{symbol}")
       request = request.parse(:json)
+      # ^make a request to cmc api using the symbol of the current position and parse into json format
       position.price = '%.2f' % request["data"][symbol]["quote"]["USD"]["price"]
       position.percent_change_1h = '%.2f' % request["data"][symbol]["quote"]["USD"]["percent_change_1h"]
       position.percent_change_24h = '%.2f' % request["data"][symbol]["quote"]["USD"]["percent_change_24h"]
       position.percent_change_7d = '%.2f' % request["data"][symbol]["quote"]["USD"]["percent_change_7d"]
       position.percent_change_30d = '%.2f' % request["data"][symbol]["quote"]["USD"]["percent_change_30d"]
-      i += 1
+      # various value reassignments 
     end
-    render json: positions
+    render json: positions # render as json using the positions serializer found at ./serializers/position_serializer.rb
   end
 
+  # SHOW ROUTE
   def show
-    position = Position.find_by(user_id: current_user.id, id: params[:id])
+    position = Position.find_by(user_id: current_user.id, id: params[:id]) # find a specific position belonging to current user and search by id
     symbol = position.symbol
     request = HTTP.get("https://pro-api.coinmarketcap.com/v1/cryptocurrency/quotes/latest?CMC_PRO_API_KEY=#{$cmc_api_keys.sample}&symbol=#{symbol}")
     request = request.parse(:json)
 
-    position.price = '%.2f' % (request["price"].to_i)
+    position.price = '%.2f' % (request["data"][symbol]["quote"]["USD"]["price"].to_i) # update price
 
     render json: position
   end
 
+  # CREATE ROUTE
   def create
     symbol = params[:symbol]
     request = HTTP.get("https://pro-api.coinmarketcap.com/v1/cryptocurrency/quotes/latest?CMC_PRO_API_KEY=#{$cmc_api_keys.sample}&symbol=#{symbol}")
     request = request.parse(:json)
     position = Position.new(
       user_id: current_user.id,
-      symbol: params[:symbol],
-      amount: params[:amount],
-      purchase_price: '%.2f' % request["data"][symbol]["quote"]["USD"]["price"]
+      symbol: params[:symbol], # get symbol via user input
+      amount: params[:amount], # get amount via user input
+      purchase_price: '%.2f' % request["data"][symbol]["quote"]["USD"]["price"] # get price via user inputed symbol
     )
 
     if position.save
       render json: position
-    else
+    else # error handling, provides messages and code
       render json: { errors: position.errors.full_messages }, status: :unproccessable_entity
     end
   end
 
+  # UPDATE ROUTE
   def update
     position = Position.find_by(id: params[:id])
-    if position.user_id == current_user.id
-      position.amount = params[:amount] || position.amount
+    if position.user_id == current_user.id # Ensure the user has permission to update the selected position
+      position.amount = params[:amount] || position.amount # Users can only change the amount of their position
     end
     if position.save
       render json: position
-    else
+    else # error handling
       render json: { errors: position.errors.full_messages }, status: :unproccessable_entity
     end
   end
 
+  # DESTROY ROUTE
   def destroy
     position = Position.find_by(id: params[:id])
-    if position.user_id == current_user.id
+    if position.user_id == current_user.id # Ensure the user has permission to delete the selected position
       position.destroy
       render json: {message: "Position successfully destroyed"}
     else
-      render json: { errors: position.errors.full_messages }, status: 422
+      render json: { errors: position.errors.full_messages }, status: 422 # if not, throw error
     end
   end
 

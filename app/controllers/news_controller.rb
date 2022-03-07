@@ -7,3 +7,4 @@ class NewsController < ApplicationController
     render json: request
   end
 end
+# simple news api
