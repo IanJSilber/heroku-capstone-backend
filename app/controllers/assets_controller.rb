@@ -2,6 +2,8 @@ require_relative "../../.api_keys.rb"
 
 class AssetsController < ApplicationController
 
+  before_action :authenticate_user
+  
   def index
     assets = Asset.where(user_id: current_user.id) # select the assets based on user
 

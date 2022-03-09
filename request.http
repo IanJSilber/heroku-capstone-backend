@@ -1,9 +1,13 @@
 jwt = eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJleHAiOjE2Mzg2NDMxNjF9.h_3f6JUFCx3-75xahBK52r5tg_LPLaYDvFxM-x3evGg
 
 ### assets create
-GET https://dry-temple-69566.herokuapp.com/assets/1
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjozLCJleHAiOjE2NDY4NjE1NDh9.Rb8HiaNYl38iMPNlbx6Up9H99Fy-lGHj1mThrattSNs
+POST http://localhost:3000/assets
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJleHAiOjE2NDY4OTMzMjJ9.W0R5rYJoDw9QPYTTAA4C_o1VzjCSzffYZxIRpD2XZOg
 Content-Type: application/json
+
+{
+  "symbol": "ETH"
+}
 
 
 ###
