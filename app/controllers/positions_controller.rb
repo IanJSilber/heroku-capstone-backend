@@ -7,7 +7,9 @@ class PositionsController < ApplicationController
     positions = Position.where(user_id: current_user.id) # positions = positions that belong to the current user
 
     positions.each do |position| # go through each position and update price and percent changes
-      symbol = position.symbol
+      symbol = position.symbol  
+      # ^ for use in cmc_api call // https://pro-api.coinmarketcap.com/v1/cryptocurrency/quotes/latest?CMC_PRO_API_KEY=bf3842fe-3658-477c-97cf-b64d82a50e2f&symbol=BTC
+      # return all cryptocurrencies: https://pro-api.coinmarketcap.com/v1/cryptocurrency/listings/latest?CMC_PRO_API_KEY=bf3842fe-3658-477c-97cf-b64d82a50e2f
       request = HTTP.get("https://pro-api.coinmarketcap.com/v1/cryptocurrency/quotes/latest?CMC_PRO_API_KEY=#{$cmc_api_keys.sample}&symbol=#{symbol}")
       request = request.parse(:json)
       # ^make a request to cmc api using the symbol of the current position and parse into json format
