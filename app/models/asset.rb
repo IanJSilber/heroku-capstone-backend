@@ -1,5 +1,5 @@
 class Asset < ApplicationRecord
-  belongs_to :watchlist
+  belongs_to :user
   validates :symbol, uniqueness: true
   before_validation :uppercase_symbol # before allowing request call the uppercase_symbol method below
 
