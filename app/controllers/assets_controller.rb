@@ -3,7 +3,7 @@ require_relative "../../.api_keys.rb"
 class AssetsController < ApplicationController
 
   def index
-    assets = Asset.where(watchlist_id: params[:watchlist_id]) # select the assets based on watchlist
+    assets = Asset.where(watchlist_id: params[:watchlist_id], user_id: current_user.id) # select the assets based on watchlist
 
     i = 0
     while i < assets.length

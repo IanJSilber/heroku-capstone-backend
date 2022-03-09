@@ -1,15 +1,10 @@
 jwt = eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJleHAiOjE2Mzg2NDMxNjF9.h_3f6JUFCx3-75xahBK52r5tg_LPLaYDvFxM-x3evGg
 
-### Users create (signup)
-POST https://dry-temple-69566.herokuapp.com/users
+### assets create
+GET https://dry-temple-69566.herokuapp.com/assets/1
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjozLCJleHAiOjE2NDY4NjE1NDh9.Rb8HiaNYl38iMPNlbx6Up9H99Fy-lGHj1mThrattSNs
 Content-Type: application/json
 
-{
-  "name": "Ian",
-  "email": "Ian@test.com",
-  "password": "password",
-  "password_confirmation": "password"
-}
 
 ###
 
@@ -17,7 +12,7 @@ POST https://dry-temple-69566.herokuapp.com/sessions
 Content-Type: application/json
 
 {
-  "email": "Ian@test.com",
+  "email": "ian@example.com",
   "password": "password"
 }
 ###
