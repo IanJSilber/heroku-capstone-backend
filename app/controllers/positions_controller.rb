@@ -4,7 +4,7 @@ class PositionsController < ApplicationController
   before_action :authenticate_user
   # INDEX ROUTE
   def index
-    positions = Position.where(user_id: current_user.id) # positions = positions that belong to the current user
+    positions = Position.where(user_id: current_user) # positions = positions that belong to the current user
 
     positions.each do |position| # go through each position and update price and percent changes
       symbol = position.symbol  
