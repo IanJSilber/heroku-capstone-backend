@@ -5,7 +5,7 @@ class TopCoinsController < ApplicationController
   # TOP COINS INDEX - get top 15 cryptocurrencies by market cap
   def index
     top_coins = TopCoin.all
-    request = HTTP.get("https://pro-api.coinmarketcap.com/v1/cryptocurrency/listings/latest?CMC_PRO_API_KEY=#{$cmc_api_keys.sample}")
+    request = HTTP.get("https://pro-api.coinmarketcap.com/v1/cryptocurrency/listings/latest?CMC_PRO_API_KEY=#{ENV[cmc_api_keys].split(",").sample}")
     request = request.parse(:json)
     i = 0
     15.times do # get the 15 top coins

@@ -27,3 +27,6 @@
 # /config/master.key
 
 # /config/credentials/production.key
+
+# Ignore application configuration
+/config/application.yml

@@ -1,6 +1,4 @@
 Rails.application.routes.draw do
-
-  get "/" => "home#hello"
   #User and Sessions routes
 
   get "/users" => "users#index"

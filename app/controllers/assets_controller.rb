@@ -9,7 +9,7 @@ class AssetsController < ApplicationController
 
     assets.each do |asset|
       symbol = asset.symbol # get the symbol
-      request = HTTP.get("https://pro-api.coinmarketcap.com/v1/cryptocurrency/quotes/latest?CMC_PRO_API_KEY=#{$cmc_api_keys.sample}&symbol=#{symbol}")
+      request = HTTP.get("https://pro-api.coinmarketcap.com/v1/cryptocurrency/quotes/latest?CMC_PRO_API_KEY=#{ENV[cmc_api_keys].split(",").sample}&symbol=#{symbol}")
       request = request.parse(:json) # make the request using the symbol
       asset.name = request["data"][symbol]["name"]
       asset.price = '%.2f' % request["data"][symbol]["quote"]["USD"]["price"]
