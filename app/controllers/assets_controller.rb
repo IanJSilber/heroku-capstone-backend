@@ -1,5 +1,3 @@
-require_relative "../../.api_keys.rb"
-
 class AssetsController < ApplicationController
 
   before_action :authenticate_user

@@ -1,4 +1,3 @@
-require_relative "../../.api_keys.rb"
 class PositionsController < ApplicationController
 
   before_action :authenticate_user

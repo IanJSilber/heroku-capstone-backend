@@ -1,5 +1,3 @@
-require_relative "../../.api_keys.rb"
-
 class TopCoinsController < ApplicationController
 
   # TOP COINS INDEX - get top 15 cryptocurrencies by market cap
