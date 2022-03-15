@@ -9,7 +9,7 @@ class PositionsController < ApplicationController
       symbol = position.symbol  
       # ^ for use in cmc_api call // https://pro-api.coinmarketcap.com/v1/cryptocurrency/quotes/latest?CMC_PRO_API_KEY=bf3842fe-3658-477c-97cf-b64d82a50e2f&symbol=BTC
       # return all cryptocurrencies: https://pro-api.coinmarketcap.com/v1/cryptocurrency/listings/latest?CMC_PRO_API_KEY=bf3842fe-3658-477c-97cf-b64d82a50e2f
-      request = HTTP.get("https://pro-api.coinmarketcap.com/v1/cryptocurrency/quotes/latest?CMC_PRO_API_KEY=#{ENV[cmc_api_keys].split(",").sample}&symbol=#{symbol}")
+      request = HTTP.get("https://pro-api.coinmarketcap.com/v1/cryptocurrency/quotes/latest?CMC_PRO_API_KEY=#{ENV["cmc_api_keys"].split(",").sample}&symbol=#{symbol}")
       request = request.parse(:json)
       # ^make a request to cmc api using the symbol of the current position and parse into json format
       position.price = '%.2f' % request["data"][symbol]["quote"]["USD"]["price"]
@@ -26,7 +26,7 @@ class PositionsController < ApplicationController
   def show
     position = Position.find_by(user_id: current_user.id, id: params[:id]) # find a specific position belonging to current user and search by id
     symbol = position.symbol
-    request = HTTP.get("https://pro-api.coinmarketcap.com/v1/cryptocurrency/quotes/latest?CMC_PRO_API_KEY=#{ENV[cmc_api_keys].split(",").sample}&symbol=#{symbol}")
+    request = HTTP.get("https://pro-api.coinmarketcap.com/v1/cryptocurrency/quotes/latest?CMC_PRO_API_KEY=#{ENV["cmc_api_keys"].split(",").sample}&symbol=#{symbol}")
     request = request.parse(:json)
 
     position.price = '%.2f' % (request["data"][symbol]["quote"]["USD"]["price"].to_i) # update price
@@ -37,7 +37,7 @@ class PositionsController < ApplicationController
   # CREATE ROUTE
   def create
     symbol = params[:symbol]
-    request = HTTP.get("https://pro-api.coinmarketcap.com/v1/cryptocurrency/quotes/latest?CMC_PRO_API_KEY=#{ENV[cmc_api_keys].split(",").sample}&symbol=#{symbol}")
+    request = HTTP.get("https://pro-api.coinmarketcap.com/v1/cryptocurrency/quotes/latest?CMC_PRO_API_KEY=#{ENV["cmc_api_keys"].split(",").sample}&symbol=#{symbol}")
     request = request.parse(:json)
     position = Position.new(
       user_id: current_user.id,
