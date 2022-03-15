@@ -1,24 +1,15 @@
-# README
+# Cryptographer - Cryptocurrency Price Tracking Project
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+As someone who enjoys backend programming much more than frontend design, this was my favorite part of my project. I spent a lot of time trying to make this
+beautiful but think it could still use many improvements. You can find the deployed full stack app at - https://cryptographer1.netlify.app/
+Feel free to reach out to me @ iansilber32@gmail.com with any errors/suggestions you may run into!
 
-Things you may want to cover:
+Things to cover:
 
-* Ruby version
+* Ruby version - 3.0.1
 
-* System dependencies
+* Rails version - 6.1.4.1
 
-* Configuration
+* Database - postgreSQL
 
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+* Database initialization - you will want to run a db:seed to create the top 15 coins
