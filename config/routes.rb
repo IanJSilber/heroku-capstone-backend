@@ -14,18 +14,18 @@ Rails.application.routes.draw do
   get "/top-coins" => "top_coins#index"
 
   #positions routes
-
-  get "/positions" => "positions#index"
-  get "/positions/:id" => "positions#show"
-  post "/positions" => "positions#create"
-  patch "/positions/:id" => "positions#update"
-  delete "/positions/:id" => "positions#destroy"
+  resources :positions
+  # get "/positions" => "positions#index"
+  # get "/positions/:id" => "positions#show"
+  # post "/positions" => "positions#create"
+  # patch "/positions/:id" => "positions#update"
+  # delete "/positions/:id" => "positions#destroy"
 
   #assets routes
 
   get "/assets" => "assets#index"
   post "/assets" => "assets#create"
   delete "/assets/:id" => "assets#destroy"
-  
+
 end
 #this is a github test
