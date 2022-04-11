@@ -2,12 +2,12 @@ require 'rails_helper'
 
 RSpec.describe Position, type: :model do
   let(:user) {
-    User.new(:email => "ian@example.com", :password => "password")
+    User.create!(:email => "ian@example.com", :password => "password")
   }
   subject { described_class.new(
     symbol: "BTC",
     amount: 2000,
-    user_id: 1)
+    user_id: user.id)
   }
 
   it "is valid with valid attributes" do
